@@ -15,9 +15,13 @@ mongo_client = AsyncIOMotorClient(MONGO_URI)
 db = mongo_client["discord_bot"]
 user_collection = db["users"]
 
+# Enable necessary intents for your bot (e.g., member updates, presence updates)
 intents = discord.Intents.default()
-intents.message_content = True
+intents.message_content = True  # Allow bot to read message content
+intents.members = True  # Enable member updates (e.g., when members join/leave)
+intents.presences = True  # Enable presence updates (e.g., tracking online status)
 
+# Create bot instance with intents
 bot = commands.Bot(command_prefix="!", intents=intents)
 
 @bot.event
